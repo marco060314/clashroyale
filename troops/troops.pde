@@ -1,4 +1,3 @@
-
 class Troop{
   public int maxHp;
   public int hp;
@@ -6,6 +5,8 @@ class Troop{
   public int movespeed;
   public int x;
   public int y;
+  public int atkCount,atkspeed;
+  public int elixir;
   public Troop(int x, int y){
     this.x = x;
     this.y = y;
@@ -49,5 +50,7 @@ class Troop{
       }
     }
   }
+  
+  
   
 }
