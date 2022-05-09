@@ -7,10 +7,22 @@ class Troop{
   public int y;
   public int atkCount,atkspeed;
   public int elixir;
+  HashMap<String,Integer> properties;
   public Troop(int x, int y){
     this.x = x;
     this.y = y;
+    properties=new HashMap<String,Integer>();
+    properties.put("x",x);
+    properties.put("y",y);
   }
+  public Troop(){
+    properties=new HashMap<String,Integer>();
+  }
+  
+  public Troop(Troop t){
+    properties=new HashMap<String,Integer>(t.properties);
+  }
+  
   
   public double distance(int x, int y, int x1, int y1){
     int xd = x-x1;
