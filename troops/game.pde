@@ -4,11 +4,18 @@ class Game {
   public ArrayList<Troop> c1,c2;
   public int elixir1, elixir2;
   public int cardSelected=1;
+  Tower t1,t2;
   Game() {
     c1=new ArrayList<Troop>();
     c2=new ArrayList<Troop>();
     initAL(c1);
     initAL(c2);
+    t1=new Tower(500-75,10);
+    t2=new Tower(500-75,600);
+    player=new ArrayList<Troop>();
+    comp=new ArrayList<Troop>();
+    player.add(t2);
+    comp.add(t1);
   }
   public void initAL(ArrayList<Troop> t) {
  /*   t.add(new Hog());
@@ -25,6 +32,9 @@ class Game {
       if(player.get(i).hp<0) {
         player.remove(i);
       }
+      else {
+        player.get(i).move(comp);
+      }
     }
     for(int i=comp.size()-1; i>=0; i--) {
       if(comp.get(i).hp<0) {
@@ -32,10 +42,10 @@ class Game {
       }
     }
   }
-  public void placeCard(){
-    Troop t = new Troop(c1.get(cardSelected));
-    t.properties.put("x",mouseX);
-    t.properties.put("y",mouseY);
-    player.add(t);
+  public void placeCard(Troop t){
+    if (elixir1 > t.elixir){ 
+      Troop f = new Knight(mouseX,mouseY);
+      player.add(f);
+     }
   }
 }

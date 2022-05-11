@@ -4,6 +4,7 @@ class Troop{
   public int attackdamage,attackrange;
   public int movespeed;
   public int x;
+  public int IsDead;
   public int y;
   public int atkCount,atkspeed;
   public int elixir;
@@ -12,8 +13,12 @@ class Troop{
     this.x = x;
     this.y = y;
     properties=new HashMap<String,Integer>();
-    properties.put("x",x);
+    properties.put("x",x);  
     properties.put("y",y);
+    fill(153);
+    System.out.println("?");
+    rect(x,y,150,150);
+    hp=100;
   }
   public Troop(){
     properties=new HashMap<String,Integer>();
@@ -21,6 +26,8 @@ class Troop{
   
   public Troop(Troop t){
     properties=new HashMap<String,Integer>(t.properties);
+    x=properties.get("x");
+    y=properties.get("y");
   }
   
   
@@ -29,6 +36,12 @@ class Troop{
     int yd = y - y1;
     return Math.sqrt(xd*xd + yd*yd);
     
+  }
+  public void setting(int dmg, int health, int eli){
+    elixir = eli;
+    attackdamage = dmg;
+    maxHp = health;
+    hp = health;
   }
   
   public void move(ArrayList<Troop> tal){ //THIS Troop is in tal
@@ -52,13 +65,20 @@ class Troop{
          x+=xd;
          y+=yd;
       }
+      rect(x,y,150,150);
   }
   
   public void interact(ArrayList<Troop> tal) {
-    for(Troop t:tal) {
-      if(distance(x,y,t.x,t.y)<=attackrange) {
-        t.hp=t.hp-attackdamage;
-        break;
+    if (IsDead == 0){
+      if (hp < 0){
+        IsDead = 1;
+        fill(365);
+      }
+      for(Troop t:tal) {
+        if(distance(x,y,t.x,t.y)<=attackrange) {
+          t.hp-=attackdamage;
+          break;
+        }
       }
     }
   }

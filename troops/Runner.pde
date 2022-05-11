@@ -1,35 +1,32 @@
 Game g;
 
-
-
+void settings(){
+    size(1000,1000);
+}
 void setup() {
-//  size(1000,1000);
+    background(255);
+    g=new Game();
 }
 
 void draw() {  
+  g.tick();
 }
 void keyPressed() {
   if (key==113) {
-    background((int)(Math.random()*100));
     g.cardSelected=1;
   }
   else if(key==119) {
-        background((int)(Math.random()*100));
-            g.cardSelected=2;
-
+      g.cardSelected=2;
   }
   else if(key==101) {
-        background((int)(Math.random()*100));
-            g.cardSelected=3;
-
+      g.cardSelected=3;
   }
   else if(key==114) {
-        background((int)(Math.random()*100));
-            g.cardSelected=4;
-
+      g.cardSelected=4;
   }
   
 }
 void mouseClicked(){
-  g.placeCard(mouseX,mouseY);
+  Troop t = new Knight(mouseX, mouseY);
+   g.placeCard(t);
 }
