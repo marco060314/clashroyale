@@ -28,6 +28,7 @@ class Game {
     t.add(new Giant());*/
   }
   public void tick() {
+    background(255);
     for(int i=player.size()-1; i>=0; i--) {
       if(player.get(i).hp<0) {
         player.remove(i);
@@ -40,12 +41,12 @@ class Game {
       if(comp.get(i).hp<0) {
         comp.remove(i);
       }
+      else {
+        comp.get(i).move(player);
+      }
     }
   }
-  public void placeCard(Troop t){
-    if (elixir1 > t.elixir){ 
-      Troop f = new Knight(mouseX,mouseY);
-      player.add(f);
-     }
+  public void placeCard(Troop t) {
+      player.add(t);
   }
 }

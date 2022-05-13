@@ -16,9 +16,9 @@ class Troop{
     properties.put("x",x);  
     properties.put("y",y);
     fill(153);
-    System.out.println("?");
     rect(x,y,150,150);
     hp=100;
+    movespeed=10;
   }
   public Troop(){
     properties=new HashMap<String,Integer>();
@@ -47,6 +47,7 @@ class Troop{
   public void move(ArrayList<Troop> tal){ //THIS Troop is in tal
       double dist=100000;
       int xd=0,yd=0;
+      Troop s;
       for(Troop t:tal) {
         int xDist= x-t.x;
         int yDist=y-t.y;
@@ -54,17 +55,23 @@ class Troop{
           dist=Math.sqrt(xDist*xDist+yDist*yDist);
           xd=xDist;
           yd=yDist;
+          s=t;
         }
       }
       if(dist>movespeed) {
         double ratio = Math.min(movespeed*1.0/dist,1.0);
-        x+=xd*ratio;
-        y+=yd*ratio;
+        System.out.println(dist);
+        System.out.println(ratio);
+        x-=xd*ratio;
+        y-=yd*ratio;
+        if(s instanceof Tower) {
+        }
       }
       else {
-         x+=xd;
-         y+=yd;
+         x-=xd;
+         y-=yd;
       }
+      System.out.println("rect("+x+","+y+", 150, 150)");
       rect(x,y,150,150);
   }
   
