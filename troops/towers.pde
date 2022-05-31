@@ -1,11 +1,10 @@
 class Tower extends Troop {
-  int midX,midY;
   Tower(int x,int y) {
-    super(x,y);
+    super(x,y,150);
+    hp=10000;
   }
   @Override
   public void move(ArrayList<Troop> t) {
-    fill(153);
-    rect(x,y,150,150);
+    display();
   }
 }

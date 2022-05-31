@@ -13,20 +13,19 @@ void draw() {
 }
 void keyPressed() {
   if (key==113) {
-    g.cardSelected=1;
+    g.cardSelected=0;
   }
   else if(key==119) {
-      g.cardSelected=2;
+      g.cardSelected=1;
   }
   else if(key==101) {
-      g.cardSelected=3;
+      g.cardSelected=2;
   }
   else if(key==114) {
-      g.cardSelected=4;
+      g.cardSelected=3;
   }
   
 }
 void mouseClicked(){
-  Troop t = new Knight(mouseX, mouseY);
-   g.placeCard(t);
+   g.placeCard();
 }

@@ -9,7 +9,8 @@ class Troop{
   public int atkCount,atkspeed;
   public int elixir;
   HashMap<String,Integer> properties;
-  public Troop(int x, int y){
+  public int length;
+  public Troop(int x, int y,int length){
     this.x = x;
     this.y = y;
     properties=new HashMap<String,Integer>();
@@ -18,7 +19,9 @@ class Troop{
     fill(153);
     rect(x,y,150,150);
     hp=100;
-    movespeed=10;
+    attackdamage=1;
+    movespeed=1;
+    this.length=length;
   }
   public Troop(){
     properties=new HashMap<String,Integer>();
@@ -37,17 +40,11 @@ class Troop{
     return Math.sqrt(xd*xd + yd*yd);
     
   }
-  public void setting(int dmg, int health, int eli){
-    elixir = eli;
-    attackdamage = dmg;
-    maxHp = health;
-    hp = health;
-  }
   
   public void move(ArrayList<Troop> tal){ //THIS Troop is in tal
       double dist=100000;
       int xd=0,yd=0;
-      Troop s;
+      Troop s=new Troop();
       for(Troop t:tal) {
         int xDist= x-t.x;
         int yDist=y-t.y;
@@ -58,38 +55,27 @@ class Troop{
           s=t;
         }
       }
+      if(dist==0) {
+        s.hp-=attackdamage;
+        return;
+      }
       if(dist>movespeed) {
         double ratio = Math.min(movespeed*1.0/dist,1.0);
-        System.out.println(dist);
-        System.out.println(ratio);
         x-=xd*ratio;
         y-=yd*ratio;
-        if(s instanceof Tower) {
-        }
       }
       else {
          x-=xd;
          y-=yd;
       }
-      System.out.println("rect("+x+","+y+", 150, 150)");
-      rect(x,y,150,150);
+      display();
   }
   
-  public void interact(ArrayList<Troop> tal) {
-    if (IsDead == 0){
-      if (hp < 0){
-        IsDead = 1;
-        fill(365);
-      }
-      for(Troop t:tal) {
-        if(distance(x,y,t.x,t.y)<=attackrange) {
-          t.hp-=attackdamage;
-          break;
-        }
-      }
-    }
+  public void display() {
+    fill(153);
+    rect(x,y,length,length);
+    fill(0);
+    text(""+hp,x+50,y+50);
   }
-  
-  
   
 }
